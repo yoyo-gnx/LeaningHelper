@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鎌倉・江の島 歴史・地理クイズ（中学受験難関校レベル）</title>
+<style>
+    body {
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #1a365d;
+        border-bottom: 3px solid #2b6cb0;
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+    h2 {
+        color: #2c5282;
+        border-left: 5px solid #3182ce;
+        padding-left: 10px;
+        margin-top: 25px;
+    }
+    .btn {
+        display: inline-block;
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #3182ce;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        box-sizing: border-box;
+        transition: background-color 0.2s;
+    }
+    .btn:hover {
+        background-color: #2b6cb0;
+    }
+    .btn-secondary {
+        background-color: #4a5568;
+    }
+    .btn-secondary:hover {
+        background-color: #2d3748;
+    }
+    .btn-disabled {
+        background-color: #cbd5e0;
+        cursor: not-allowed;
+    }
+    .btn-disabled:hover {
+        background-color: #cbd5e0;
+    }
+    .question-card {
+        background: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .question-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #2d3748;
+        line-height: 1.5;
+    }
+    .option-label {
+        display: block;
+        background: #fff;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        padding: 12px 16px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s;
+    }
+    .option-label:hover {
+        background: #ebf8ff;
+        border-color: #3182ce;
+    }
+    .option-label input {
+        margin-right: 10px;
+    }
+    .explanation-card {
+        background: #fffaf0;
+        border: 1px solid #feebc8;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .correct-text {
+        color: #c53030;
+        font-weight: bold;
+    }
+    .your-answer {
+        font-weight: bold;
+    }
+    .badge-frequent {
+        background-color: #3182ce;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .badge-hard {
+        background-color: #e53e3e;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .progress-bar-container {
+        background-color: #edf2f7;
+        border-radius: 8px;
+        height: 12px;
+        width: 100%;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .progress-bar {
+        background-color: #3182ce;
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+    .progress-text {
+        text-align: right;
+        font-size: 14px;
+        color: #718096;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    .score-box {
+        text-align: center;
+        background: #ebf8ff;
+        border: 2px solid #3182ce;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    .score-number {
+        font-size: 36px;
+        font-weight: bold;
+        color: #2b6cb0;
+    }
+    .result-badge {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: inline-block;
+    }
+    .result-badge-correct {
+        background-color: #c6f6d5;
+        color: #22543d;
+    }
+    .result-badge-incorrect {
+        background-color: #fed7d7;
+        color: #742a2a;
+    }
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- PAGE 1: 場所選択画面 -->
+    <div id="page-select">
+        <h1>鎌倉・江の島 歴史・地理クイズ</h1>
+        <p style="text-align:center; color:#4a5568;">関東難関中学受験（開成・麻布・筑駒・聖光・栄光など）レベルの社会科特化問題です。<br>チャレンジしたい場所を選択してください。（1問ずつ解答・解説が表示されます）</p>
+        
+        <button class="btn" onclick="startQuiz('engakuji')">1. 円覚寺（全20問）</button>
+        <button class="btn" onclick="startQuiz('kenchoji')">2. 建長寺（全20問）</button>
+        <button class="btn" onclick="startQuiz('hachimangu')">3. 鶴岡八幡宮（全20問）</button>
+        <button class="btn" onclick="startQuiz('zeniarai')">4. 銭洗弁天宇賀福神社（全20問）</button>
+        <button class="btn" onclick="startQuiz('kotokuin')">5. 高徳院・鎌倉大仏（全20問）</button>
+        <button class="btn" onclick="startQuiz('enoshima')">6. 江の島（全20問）</button>
+    </div>
+
+    <!-- PAGE 2: 1問出題画面 -->
+    <div id="page-question" class="hidden">
+        <div class="progress-text" id="progress-text">第 1 / 20 問</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <h1 id="spot-title-q" style="font-size:20px; border-bottom:none; margin-bottom:15px; text-align:left;">スポット名</h1>
+        
+        <div class="question-card">
+            <div class="question-title" id="q-title"></div>
+            <div id="options-container"></div>
+        </div>
+
+        <button type="button" class="btn" id="btn-submit-answer" onclick="submitCurrentAnswer()">回答を送信して解説を見る</button>
+    </div>
+
+    <!-- PAGE 3: 1問の正答・解説表示画面 -->
+    <div id="page-explanation" class="hidden">
+        <h1 id="spot-title-e" style="font-size:20px; border-bottom:none; margin-bottom:15px; text-align:left;">スポット名</h1>
+        
+        <div style="text-align:center; margin-bottom:15px;">
+            <span id="result-badge" class="result-badge"></span>
+        </div>
+
+        <div class="explanation-card">
+            <div class="question-title" id="e-title" style="margin-bottom:10px;"></div>
+            <div style="margin-bottom:8px; font-size:16px;">あなたの回答: <span id="e-user-ans" class="your-answer"></span></div>
+            <div style="margin-bottom:12px; font-size:16px;">正解: <span id="e-correct-ans" class="correct-text"></span></div>
+            <div style="font-size:15px; color:#2d3748; background:#fff; padding:15px; border-radius:6px; border:1px solid #cbd5e0; line-height:1.6;">
+                <strong>【解説】</strong><br><span id="e-explanation-text"></span>
+            </div>
+        </div>
+
+        <button type="button" class="btn" id="btn-next-step" onclick="nextStep()">次の問題へ</button>
+    </div>
+
+    <!-- PAGE 4: 最終成績画面 -->
+    <div id="page-final-result" class="hidden">
+        <h1 id="final-spot-title">最終判定結果</h1>
+        
+        <div class="score-box">
+            <div style="font-size: 18px; color: #4a5568;">あなたの得点</div>
+            <div class="score-number" id="final-score-text">0 / 20点</div>
+            <div id="final-score-comment" style="margin-top: 10px; font-weight: bold; font-size:18px;"></div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="backToSelect()">場所選択ページに戻る</button>
+    </div>
+</div>
+
+<script>
+const quizData = {
+    engakuji: {
+        title: "円覚寺",
+        frequent: [
+            { q: "1. 円覚寺を創建した鎌倉幕府の第8代執権はだれですか。", options: ["北条泰時", "北条時頼", "北条時宗", "北条高時"], ans: 2, exp: "円覚寺は1282年、第8代執権・北条時宗によって創建されました。" },
+            { q: "2. 円覚寺が開かれた最大の目的として正しいものはどれですか。", options: ["承久の乱の戦死者を弔うため", "元寇（文永・弘安の役）による戦死者を敵味方の区別なく弔うため", "平氏一門の菩提を弔うため", "前九年・後三年合戦の戦死者を弔うため"], ans: 1, exp: "元寇（蒙古襲来）の戦死者を敵味方の別なく弔い、禅の教えを広めるために建立されました。" },
+            { q: "3. 北条時宗が円覚寺の開山（初代住職）として宋（中国）から招いた禅僧はだれですか。", options: ["蘭渓道隆", "無学祖元", "鑑真", "栄西"], ans: 1, exp: "北条時宗は宋から「無学祖元」を招いて円覚寺を開山としました。建長寺の蘭渓道隆と区別しましょう。" },
+            { q: "4. 円覚寺が属する禅宗の宗派はどれですか。", options: ["臨済宗", "曹洞宗", "黄檗宗", "浄土真宗"], ans: 0, exp: "円覚寺は臨済宗（円覚寺派）の本山です。武士の精神的支柱として鎌倉幕府に保護されました。" },
+            { q: "5. 円覚寺境内にある「舎利殿」に関する説明として正しいものはどれですか。", options: ["神奈川県内で唯一の国宝建造物である", "室町時代に建てられた大仏殿である", "源頼朝の墓所として建てられた", "江戸時代に再建された木造三重塔である"], ans: 0, exp: "円覚寺舎利殿は神奈川県唯一の国宝建造物（建造物部門）であり、室町中期の禅宗様建築の代表例です。" },
+            { q: "6. 円覚寺の山門（三門）が登場する、夏目漱石の有名な小説はどれですか。", options: ["『坊っちゃん』", "『草枕』", "『門』", "『心』"], ans: 2, exp: "夏目漱石が円覚寺の塔頭（帰源院）に参禅した体験をもとに執筆した作品が『門』です。" },
+            { q: "7. 元寇（文永の役・弘安の役）の際、蒙古軍（元・高麗軍）を率いていた元の皇帝はだれですか。", options: ["チンギス=ハン", "フビライ=ハン", "オゴタイ=ハン", "シュレイマン"], ans: 1, exp: "元寇時の第5代皇帝はフビライ=ハンです。" },
+            { q: "8. 鎌倉五山（禅宗の寺院の格付け）において、円覚寺は何位に位置づけられていますか。", options: ["第一位", "第二位", "第三位", "第四位"], ans: 1, exp: "鎌倉五山は第一位：建長寺、第二位：円覚寺、第三位：寿福寺、第四位：浄智寺、第五位：浄妙寺です。" },
+            { q: "9. 円覚寺境内にある北条時宗の廟所（墓所）とされる塔頭はどれですか。", options: ["佛日庵", "正続院", "黄梅院", "明月院"], ans: 0, exp: "佛日庵は北条時宗・貞時・高時の開基廟（墓所）となっています。" },
+            { q: "10. 元寇の後に幕府が行った対応として正しいものはどれですか。", options: ["御家人に手厚い恩賞（十分な土地）を与えた", "異国警固番役を廃止した", "恩賞が不十分で御家人の困窮が進み、永仁の徳政令が出された", "御家人を解放して農民にした"], ans: 2, exp: "元寇は防衛戦であったため新領地が得られず、幕府は御家人に十分な恩賞を与えられませんでした。これが幕府衰退のきっかけとなり、1297年に永仁の徳政令が出されました。" }
+        ],
+        hard: [
+            { q: "11. 北条時宗が異国警固番役を強化するため、九州の沿岸に築かせた石造りの防御陣地を何と呼びますか。", options: ["元寇防塁（石築地）", "水城", "朝鮮式山城", "台場"], ans: 0, exp: "弘安の役（1281年）に備えて博多湾沿岸に築かれたのが「元寇防塁（石築地）」です。" },
+            { q: "12. 円覚寺の国宝「洪鐘（おおがね）」を寄進した、北条時宗の子である第9代執権はだれですか。", options: ["北条泰時", "北条時定", "北条貞時", "北条師時"], ans: 2, exp: "関東最大の国宝梵鐘（洪鐘）は、1301年に第9代執権・北条貞時が国家安泰を祈願して寄進しました。" },
+            { q: "13. 鎌倉幕府の最高評定機関である「評定衆」を設置した第3代執権はだれですか。", options: ["北条義時", "北条泰時", "北条重時", "北条時頼"], ans: 1, exp: "評定衆の設置（1225年）や御成敗式目の制定（1232年）は第3代執権・北条泰時の功績です。" },
+            { q: "14. 臨済宗を日本に伝え、京都に建仁寺を開いた僧はだれですか。", options: ["道元", "栄西", "空海", "親鸞"], ans: 1, exp: "臨済宗の開祖は栄西（『喫茶養生記』の著者）。曹洞宗の開祖は道元です。" },
+            { q: "15. 鎌倉五山の制を本格的に再編・整備した室町幕府の第3代将軍はだれですか。", options: ["足利尊氏", "足利義満", "足利義政", "足利義教"], ans: 1, exp: "京都五山・鎌倉五山の制を最終的に整えたのは室町幕府第3代将軍の足利義満です。" },
+            { q: "16. 鎌倉時代末期、得宗（北条氏本家）の専制政治を支えた内管領（執事）のトップで、平禅門の乱で滅ぼされた人物はだれですか。", options: ["安達泰盛", "平頼綱", "三浦泰村", "和田義盛"], ans: 1, exp: "霜月騒動で安達泰盛を倒し権力を握った平頼綱ですが、のちに平禅門の乱（1293年）で北条貞時によって滅ぼされました。" },
+            { q: "17. 円覚寺舎利殿に導入されている建築様式で、唐様とも呼ばれ、細い部材や詰組（つめぐみ）が特徴的な様式はどれですか。", options: ["和様", "大仏様（天竺様）", "禅宗様（唐様）", "帝冠様式"], ans: 2, exp: "鎌倉時代に宋から伝わった建築様式は「禅宗様（唐様）」です。重源が東大寺再建に用いたのは「大仏様」です。" },
+            { q: "18. 円覚寺開山・無学祖元が宋で元の将兵に斬られそうになった際、読んだとされる有名な偈（詩）に含まれる言葉はどれですか。", options: ["電光影裏に春風を斬る", "日日是好日", "諸行無常", "一期一会"], ans: 0, exp: "「臨剣の偈」で「電光影裏に春風を斬る（剣が光を放つ一瞬に春風を斬るようなものだ）」と述べ、刀を引かせた逸話があります。" },
+            { q: "19. 北条時宗の時代の1274年（文永の役）で、集団戦法や新兵器（てつはう）に苦しめられた幕府軍の戦い方を描いた絵巻物はどれですか。", options: ["『伴大納言絵巻』", "『蒙古襲来絵詞』", "『鳥獣戯画』", "『平治物語絵巻』"], ans: 1, exp: "肥後国の御家人・竹崎季長が自身の功績を記録させたのが『蒙古襲来絵詞』です。" },
+            { q: "20. 元寇の際、防衛線の最前線となった対馬・壱岐を治めていた現地領主で、激戦の末討ち死にした人物（対馬の守護代）はだれですか。", options: ["宗助国", "少弐景資", "菊池武房", "大友頼泰"], ans: 0, exp: "文永の役の際、対馬に押し寄せた大軍に対しわずかな兵で挑み討ち死にしたのが宗助国です。" }
+        ]
+    },
+    kenchoji: {
+        title: "建長寺",
+        frequent: [
+            { q: "1. 建長寺を創設した鎌倉幕府第5代執権はだれですか。", options: ["北条泰時", "北条時頼", "北条時宗", "北条政村"], ans: 1, exp: "建長寺は1253年、第5代執権・北条時頼によって創建された日本初の禅宗専門道場です。" },
+            { q: "2. 北条時頼が建長寺の開山（初代住職）として宋から招いた渡来僧はだれですか。", options: ["無学祖元", "蘭渓道隆", "鑑真", "隠元"], ans: 1, exp: "建長寺の初代住職（開山）は南宋の渡来僧「蘭渓道隆（大覚禅師）」です。" },
+            { q: "3. 鎌倉五山において第一位（筆頭）とされる寺院はどれですか。", options: ["円覚寺", "建長寺", "寿福寺", "浄妙寺"], ans: 1, exp: "鎌倉五山の第一位は建長寺です。" },
+            { q: "4. 建長寺の国宝である「梵鐘」に銘文を刻んだ人物はだれですか。", options: ["北条時頼", "蘭渓道隆", "北条時宗", "源頼朝"], ans: 1, exp: "建長寺の国宝梵鐘には、開山である蘭渓道隆自筆の銘文が刻まれています。" },
+            { q: "5. 建長寺の伽藍（主要な建物）の配置の特徴として正しいものはどれですか。", options: ["総門・三門・仏殿・法堂が一直線に並ぶ", "池を中心とした庭園の周囲に配置される", "左右対称の寝殿造である", "山の中に不規則に散在している"], ans: 0, exp: "中国（宋）の禅宗様式を取り入れ、主要な建物が一直線上に並ぶ幾何学的な配置が特徴です。" },
+            { q: "6. 北条時頼が行った政治施策として正しいものはどれですか。", options: ["御成敗式目の制定", "引付け（引付衆）の設置", "徳政令の発布", "関所の全面廃止"], ans: 1, exp: "北条時頼は裁判の迅速化・公正化を図るため「引付衆（引付け）」を設置しました。" },
+            { q: "7. 建長寺の発祥とも関係する、精進料理として有名な野菜スープは何ですか。", options: ["けんちん汁", "ほうとう", "のっぺい汁", "豚汁"], ans: 0, exp: "「けんちん汁」は建長寺の「建長汁（けんちょうじる）」が訛ったものと伝えられています。" },
+            { q: "8. 北条時頼が有力御家人であった三浦氏一族を滅ぼした1247年の合戦は何ですか。", options: ["和田合戦", "宝治合戦", "承久の乱", "霜月騒動"], ans: 1, exp: "1247年、北条時頼は三浦泰村らを倒し（宝治合戦）、北条氏の執権政治を固めました。" },
+            { q: "9. 建長寺仏殿の本尊となっている仏像は何ですか。", options: ["釈迦如来", "阿弥陀如来", "地蔵菩薩", "薬師如来"], ans: 2, exp: "禅寺としては珍しく、建長寺の本尊は地蔵菩薩像です（かつて処刑場・地蔵堂があった土地に建てられたため）。" },
+            { q: "10. 北条時頼が僧侶の姿に変装して諸国を巡り、庶民の暮らしを観察したという伝説を描いた謡曲（能）は何ですか。", options: ["『鉢の木』", "『敦盛』", "『道成寺』", "『隅田川』"], ans: 0, exp: "佐野源左衛門常世が貧しいながらも大切にしていた鉢の木（松・竹・梅）をくべて時頼をもてなした逸話を描いた『鉢の木』が有名です。" }
+        ],
+        hard: [
+            { q: "11. 鎌倉時代に宋から輸入された唐物や渡来銭（宋銭）の流通によって促進された経済の変化として正しいものはどれですか。", options: ["自給自足経済への逆行", "貨幣経済の普及と借上（金融業者）の発達", "紙幣（手形）のみの流通", "米による完全な代金支払いの義務化"], ans: 1, exp: "宋銭の大規模な輸入により、年貢の銭納化や借上（金融業者）の登場など貨幣経済が急速に発達しました。" },
+            { q: "12. 建長寺法堂の天井に描かれている「雲龍図」を手掛けた日本画家はだれですか。", options: ["横山大観", "小泉淳作", "平山郁夫", "東山魁夷"], ans: 1, exp: "2003年の創建750年を記念して小泉淳作画伯によって描かれた迫力ある雲龍図です。" },
+            { q: "13. 建長寺の庭園（得月楼前）を作庭したとされる、南北朝時代〜室町時代にかけて活躍した禅僧・庭園家はだれですか。", options: ["夢窓疎石", "雪舟", "運慶", "世阿弥"], ans: 0, exp: "京都の天龍寺庭園や苔寺（西芳寺）を手掛けた夢窓疎石（夢窓国師）が関わったとされています。" },
+            { q: "14. 北条時頼の死後、幼少の執権（時宗）を補佐するために置かれた「連署」を初めて設置した執権はだれですか。", options: ["北条義時", "北条泰時", "北条時頼", "北条時宗"], ans: 1, exp: "執権の補佐役である「連署」は、1225年に第3代執権・北条泰時が叔父の北条時房を任命したのが始まりです。" },
+            { q: "15. 建長寺などの禅寺で用いられた、花頭窓（かとうまど）や扇垂木を特徴とする建築様式は何ですか。", options: ["和様", "大仏様", "禅宗様", "寝殿造"], ans: 2, exp: "中国宋代の建築様式を取り入れたもので、花頭窓や細かな組物が特徴の「禅宗様」です。" },
+            { q: "16. 宝治合戦（1247年）で滅ぼされた有力御家人・三浦泰村が自害した場所は鎌倉のどこですか。", options: ["頼朝の墓（法華堂）", "鶴岡八幡宮", "建長寺", "極楽寺"], ans: 0, exp: "三浦一族は源頼朝の墓所である法華堂にこもり、500余名で自害しました。" },
+            { q: "17. 宋から日本へ帰化した蘭渓道隆が、弟子たちに厳しい禅の修行態度を説いた書物（国宝）は何ですか。", options: ["『法華経』", "『立正安国論』", "『大覚禅師語録（法語規約）』", "『愚管抄』"], ans: 2, exp: "蘭渓道隆（大覚禅師）が自筆で戒律・規律を記した『法語規約』は国宝に指定されています。" },
+            { q: "18. 室町時代に鎌倉五山を中心として発達した、五山の禅僧による漢詩文の文章・文学活動を何と呼びますか。", options: ["国文学", "五山文学", "万葉文学", "元禄文学"], ans: 1, exp: "五山の禅僧によって栄えた漢詩文・学問を「五山文学」と呼びます。" },
+            { q: "19. 鎌倉時代、建長寺の修復費用を得るために幕府が元（中国）へ派遣した貿易船は何と呼ばれますか。", options: ["朱印船", "建長寺船", "天龍寺船", "遣唐使船"], ans: 1, exp: "1325年、幕府は建長寺の修復費用を得るために「建長寺船」を元に派遣しました。" },
+            { q: "20. 北条時頼が皇室の継承問題に関与し、後深草上皇の系統と亀山上皇の系統が交代で即位するきっかけとなった対立関係は何ですか。", options: ["持明院統と大覚寺統の対立", "南朝と北朝の合体", "関ヶ原の戦い", "保元の乱"], ans: 0, exp: "持明院統（後深草）と大覚寺統（亀山）の対立に対し、幕府が介入して両統迭立（交代で即位）をさせました。" }
+        ]
+    },
+    hachimangu: {
+        title: "鶴岡八幡宮",
+        frequent: [
+            { q: "1. 鶴岡八幡宮を現在の場所に移し、鎌倉幕府の都市計画の軸とした人物はだれですか。", options: ["源頼義", "源義朝", "源頼朝", "源実朝"], ans: 2, exp: "1180年、源頼朝は由比ヶ浜近くにあった由比若宮を現在の地に移し、鎌倉の町づくりの中心としました。" },
+            { q: "2. 鶴岡八幡宮の参道であり、源頼朝が妻・北条政子の安産を祈願して整備したまっすぐな道は何ですか。", options: ["段葛（若宮大路）", "小町通り", "御成通り", "七里ヶ浜"], ans: 0, exp: "若宮大路の中央一段高く作られた歩道が「段葛（だんかずら）」です。" },
+            { q: "3. 1219年、鶴岡八幡宮の大石段付近で第3代将軍・源実朝を暗殺した人物はだれですか。", options: ["源頼家", "公暁", "北条義時", "和田義盛"], ans: 1, exp: "第2代将軍・源頼家の子である公暁（くぎょう）が、父の仇として叔父の実朝を暗殺しました。" },
+            { q: "4. 源実朝暗殺の舞台となり、2010年に倒木したものの現在再生が進んでいる象徴的な木は何ですか。", options: ["大楠", "大銀杏", "三春滝桜", "建長寺杉"], ans: 1, exp: "「隠れ銀杏」とも呼ばれた「大銀杏」の樹陰に公暁が潜んでいたという伝説があります。" },
+            { q: "5. 静御前が頼朝・政子の前で、義経を慕う歌を歌い舞を披露したとされる鶴岡八幡宮内の建物は何ですか。", options: ["本宮（上宮）", "舞殿（下拝殿）", "白旗神社", "丸山稲荷神社"], ans: 1, exp: "舞殿（下拝殿）は静御前が頼朝の前で舞を披露した舞台と伝えられます。" },
+            { q: "6. 源頼朝が1185年に文治の勅許を得て、全国の国ごとに設置した役職は何ですか。", options: ["地頭", "守護", "国司", "押領使"], ans: 1, exp: "国ごとに「守護」（軍事・警察）、荘園や公領ごとに「地頭」（年貢の徴収・管理）を設置しました。" },
+            { q: "7. 源氏の繁栄を祈る池と、平家の滅亡を祈る池として境内にある2つの池を何と呼びますか。", options: ["源平池（源氏池・平家池）", "洗心池", "鏡池", "龍の池"], ans: 0, exp: "北条政子が掘らせたと伝えられ、源氏池には島が3つ（繁栄）、平家池には島が4つ（滅亡）配されています。" },
+            { q: "8. 鎌倉幕府の政務を行う機関として、源頼朝が設置した「公文所」は後に何と改称されましたか。", options: ["問注所", "政所", "評定衆", "侍所"], ans: 1, exp: "軍事を司る「侍所」、行政・財政を司る「公文所（のち政所）」、裁判を司る「問注所」を置きました。" },
+            { q: "9. 源実朝が編纂に関わり、万葉風の歌風で知られる歌集は何ですか。", options: ["『金槐和歌集』", "『新古今和歌集』", "『古今和歌集』", "『小倉百人一首』"], ans: 0, exp: "源実朝（歌人の師は藤原定家）が自らの歌をまとめた歌集が『金槐和歌集』です。" },
+            { q: "10. 1333年、鎌倉に攻め入って鎌倉幕府を滅ぼした新田義貞に対し、最後の執権（第14代・実質16代）として自害した人物はだれですか。", options: ["北条高時", "北条貞時", "北条泰時", "北条時宗"], ans: 0, exp: "1333年、新田義貞の鎌倉攻めにより北条高時ら北条一族は東勝寺で自害し、鎌倉幕府は滅亡しました。" }
+        ],
+        hard: [
+            { q: "11. 1203年、第2代将軍・源頼家が病に倒れた際、北条氏と対立して比企の乱を起こし滅ぼされた頼家の妻の父はだれですか。", options: ["比企能員", "畠山重忠", "和田義盛", "梶原景時"], ans: 0, exp: "比企能員（ひきのよしかず）は北条時政と対立し、北条氏によって討たれました。" },
+            { q: "12. 初代執権・北条時政が、後妻の牧の方と共謀して将軍を差し替えようとし追放されたクーデター未遂事件は何ですか。", options: ["牧氏事件（牧氏の変）", "梶原景時の変", "畠山重忠の乱", "宝治合戦"], ans: 0, exp: "1205年の牧氏事件により、北条政子・義時姉弟は父・時政を追放し、北条義時が第2代執権となりました。" },
+            { q: "13. 鶴岡八幡宮の社頭で行われる、武士が馬に乗りながら弓で的を射る伝統的な神事は何ですか。", options: ["流鏑馬（やぶさめ）", "犬追物", "笠懸", "通し矢"], ans: 0, exp: "武芸の嗜み（騎射三物）のうち、流鏑馬は鶴岡八幡宮の例大祭などで有名です。" },
+            { q: "14. 源頼朝が1183年に後白河法皇から得た、東国の荘園・公領からの年貢納入請負権を認めた宣旨は何ですか。", options: ["寿永二年十月宣旨", "文治の勅許", "建久の過所", "承久の宣旨"], ans: 0, exp: "1183年の「寿永二年十月宣旨」により、東国における幕府の支配権が公認されました。" },
+            { q: "15. 1213年、侍所の別当（長官）であった有力御家人が、北条義時の挑発を受けて挙兵し滅ぼされた合戦は何ですか。", options: ["和田合戦", "畠山重忠の乱", "承久の乱", "観応の擾乱"], ans: 0, exp: "和田義盛が討たれた「和田合戦」により、北条義時は侍所別当も兼任し執権政治を固めました。" },
+            { q: "16. 鶴岡八幡宮の本宮（上宮）は1828年に再建されました。この再建を命じた江戸幕府第11代将軍はだれですか。", options: ["徳川家康", "徳川綱吉", "徳川家斉", "徳川家慶"], ans: 2, exp: "現在の本宮（国の重要文化財）は、1828年に第11代将軍・徳川家斉によって再建された建物です。" },
+            { q: "17. 源実朝が暗殺された後、北条政子らが京都の朝廷（後鳥羽上皇）から迎えた第4代将軍（摂家将軍）はだれですか。", options: ["九条頼経", "宗尊親王", "源頼家", "藤原頼通"], ans: 0, exp: "源氏の血統が途絶えたため、摂関家からわずか2歳の九条頼経を第4代将軍として迎えました。" },
+            { q: "18. 1221年の「承久の乱」の際、幕府軍の総大将として京都へ進撃した北条義時の子はだれですか。", options: ["北条泰時", "北条時頼", "北条時宗", "北条重時"], ans: 0, exp: "北条泰時と北条時房が大将軍として東海道から京へ上り、朝廷側を破りました。" },
+            { q: "19. 承久の乱の結果、幕府が朝廷の監視や京都の警備のために京都に設置した機関は何ですか。", options: ["六波羅探題", "鎮西探題", "鎌倉府", "京都所司代"], ans: 0, exp: "承久の乱後、朝廷の監視や西国の統轄のため「六波羅探題」が設置されました。" },
+            { q: "20. 将軍と御家人を結びつける主従関係の基盤となった「御恩と奉公」の説明として正しいものはどれですか。", options: ["御家人は将軍に土地を与え、将軍は軍役を果たした", "将軍は御家人に所領を保護・授与（本領安堵・新恩給与）し、御家人は軍役や番役を果たした", "将軍は御家人に金銭を貸し付けた", "農民が将軍に直接税を納める仕組み"], ans: 1, exp: "土地を介した武士社会の根本原理が「御恩」と「奉公」です。" }
+        ]
+    },
+    zeniarai: {
+        title: "銭洗弁天宇賀福神社",
+        frequent: [
+            { q: "1. 銭洗弁天の創建のきっかけとなる「夢のお告げ」を受けた鎌倉幕府の初代将軍はだれですか。", options: ["源頼朝", "源頼家", "源実朝", "北条時政"], ans: 0, exp: "1185年（巳の年の巳の月巳の日）、源頼朝が夢でお告げを受けて湧き水を祀ったのが始まりです。" },
+            { q: "2. その後、銭洗弁天の湧き水でお金を洗い、一族の繁栄を祈願して「福銭」の信仰を広めた第5代執権はだれですか。", options: ["北条泰時", "北条時頼", "北条時宗", "北条貞時"], ans: 1, exp: "第5代執権・北条時頼がここで銭を洗い、一家の繁栄と天下太平を祈ったことから広がりました。" },
+            { q: "3. 銭洗弁天で祀られている、頭が人間・体がヘビの頭を持つ水の神・財宝の神は何ですか。", options: ["宇賀神（宇賀福神）", "恵比寿天", "大黒天", "毘沙門天"], ans: 0, exp: "神仏習合の神である「宇賀神（弁財天と一体とされる）」が祀られています。" },
+            { q: "4. 銭洗弁天でお金を洗うのに用いられる、洞窟内に湧き出る水は何と呼ばれていますか。", options: ["銭洗水（銭洗井）", "極楽水", "甘露水", "玉川上水"], ans: 0, exp: "鎌倉五名水の一つに数えられる「銭洗水」です。" },
+            { q: "5. 源頼朝が夢のお告げを受けた干支（十二支の縁日）に由来し、現在も参拝客で賑わう日は何の日ですか。", options: ["巳の日（みのひ）", "寅の日", "辰の日", "午の日"], ans: 0, exp: "弁財天や宇賀神の使いとされる「巳（ヘビ）の日」が縁日です。" },
+            { q: "6. 源頼朝が鎌倉に幕府を開いた理由として、地形的な利点の説明で正しいものはどれですか。", options: ["四方が平野で田畑が開墾しやすかったから", "三方が山、一方が海（南側）に囲まれた天然の要塞だったから", "巨大な河川があり水運が便利だったから", "京都に近く朝廷の動向がすぐ分かったから"], ans: 1, exp: "三方が山、南が海に面する地形は敵の侵入を防ぎやすい天然の要塞でした。" },
+            { q: "7. 鎌倉の周囲の山々を切り開いて作られた、外部に通じる7つの重要な切り通し（出口）を何と呼びますか。", options: ["鎌倉七口（七切通）", "鎌倉七福神", "鎌倉五山", "鎌倉街道"], ans: 0, exp: "化粧坂切通や極楽寺切通など「鎌倉七口」と呼ばれます。" },
+            { q: "8. 銭洗弁天の近くにあり、1333年の新田義貞の鎌倉攻めで激戦地となった切り通しはどれですか。", options: ["化粧坂（けわいざか）切通", "朝比奈切通", "極楽寺切通", "名越切通"], ans: 0, exp: "源氏山・銭洗弁天の北側に位置する「化粧坂切通」は鎌倉攻めの主戦場でした。" },
+            { q: "9. 鎌倉時代に商業が活発化し、月に定期的に開かれるようになった市を何と呼びますか。", options: ["楽市", "三斎市（定期市）", "闇市", "株仲間"], ans: 1, exp: "鎌倉時代には月に3回開かれる「三斎市」などの定期市が各地に登場しました。" },
+            { q: "10. 鎌倉時代の貨幣として流通した「宋銭」の材質は何ですか。", options: ["金", "銀", "銅（銅銭）", "鉄"], ans: 2, exp: "宋（中国）から大量に輸入された「銅銭（宋銭）」が主な通貨として流通しました。" }
+        ],
+        hard: [
+            { q: "11. 次のうち「鎌倉五名水」に含まれないものはどれですか。", options: ["銭洗水", "甘露の井", "梶原の太刀洗水", "玉川上水"], ans: 3, exp: "玉川上水は江戸時代に江戸市中に上水道を引くために造られた用水路です。" },
+            { q: "12. 鎌倉時代に発達した、商品流通を仲介する卸売業者や保管業者（問屋の原型）を何と呼びますか。", options: ["問丸（問屋）", "借上", "座", "馬借"], ans: 0, exp: "年貢の輸送や保管、売買を仲介したのが「問丸（といまる）」です。" },
+            { q: "13. 鎌倉時代、幕府が御家人の借金苦を救うために出した1297年の法令は何ですか。", options: ["永仁の徳政令", "建武の徳政令", "寛政の改革令", "慶安の御触書"], ans: 0, exp: "第9代執権・北条貞時のもとで出されたのが「永仁の徳政令」です。" },
+            { q: "14. 銭洗弁天近くの源氏山公園に像が立っている、八幡太郎と呼ばれた源氏の武将はだれですか。", options: ["源頼義", "源義家", "源為朝", "源義朝"], ans: 1, exp: "源義家（八幡太郎義家）は前九年・後三年の役などで東国武士との主従関係を深めました。" },
+            { q: "15. 神社の中に仏教的な神が一緒に祀られる、日本固有の神と仏教が融合した思想を何と呼びますか。", options: ["神仏習合（本地垂迹説）", "儒仏同体説", "廃仏毀釈", "キリスト教禁教令"], ans: 0, exp: "日本の神は仏が人々を救うために仮の姿で現れたとする「本地垂迹説（神仏習合）」です。" },
+            { q: "16. 新田義貞が鎌倉攻めの際、稲村ヶ崎の海に投げ入れたとされるものは何ですか。", options: ["黄金の弓", "黄金の太刀", "陣太鼓", "軍扇"], ans: 1, exp: "『太平記』には義貞が龍神に祈願して「黄金の太刀」を海に投じたと記されています。" },
+            { q: "17. 鎌倉時代の手形取引や為替など、遠隔地間の金銭輸送に用いられた金融仕組みを何と呼びますか。", options: ["替銭（為替）", "朱印状", "株仲間", "専売制"], ans: 0, exp: "現金の持ち運びのリスクを避けるため手形（替銭）を用いた送金システムが発達しました。" },
+            { q: "18. 武士が「いざ鎌倉」と駆けつけた全国から鎌倉へ通じる街道網を何と呼びますか。", options: ["鎌倉街道（鎌倉往還）", "東海道五十三次", "中山道", "日光街道"], ans: 0, exp: "有事に御家人が素早く参集するための軍事道路「鎌倉街道」です。" },
+            { q: "19. 北条時頼が出家して最明寺入道と名乗った寺院（現在のあじさい寺）はどこですか。", options: ["明月院", "極楽寺", "長谷寺", "光明寺"], ans: 0, exp: "紫陽花で有名な明月院は、北条時頼が建てた最明寺（のち禅興寺）の塔頭が前身です。" },
+            { q: "20. 中世鎌倉で、市場の商品に課税したり警察権を行使した役職は何ですか。", options: ["市司（市奉行）", "勘定奉行", "蔵奉行", "京都所司代"], ans: 0, exp: "市場の治安維持や取引の公平を保つため「市司（いちのつかさ）」が置かれました。" }
+        ]
+    },
+    kotokuin: {
+        title: "高徳院・鎌倉大仏",
+        frequent: [
+            { q: "1. 高徳院にある「鎌倉大仏」の正式な名称（本尊）は何ですか。", options: ["阿弥陀如来坐像", "釈迦如来坐像", "薬師如来坐像", "大日如来坐像"], ans: 0, exp: "鎌倉大仏は「阿弥陀如来坐像」です。東大寺の大仏（盧舎那仏）と区別しましょう。" },
+            { q: "2. 鎌倉大仏の造営が開始されたとされる1252年当時の第5代執権はだれですか。", options: ["北条泰時", "北条時頼", "北条時宗", "北条義時"], ans: 1, exp: "1252年頃から青銅製大仏の造営が始まり、当時の執権は北条時頼でした。" },
+            { q: "3. 奈良の大仏と鎌倉の大仏の構造上の大きな違いとして正しいものはどれですか。", options: ["奈良の大仏は木造、鎌倉の大仏は石造", "奈良の大仏は大仏殿の中にあり、鎌倉の大仏は露坐（屋外）である", "鎌倉の大仏の方が高さが2倍以上大きい", "鎌倉の大仏は立ち姿である"], ans: 1, exp: "鎌倉大仏は津波などで大仏殿が倒壊して以降、野外（露坐）の姿となっています。" },
+            { q: "4. 室町時代末期（1498年）に大仏殿を倒壊させ、大仏を野外に至らしめた自然災害は何ですか。", options: ["関東大震災", "明応の大地震と津波", "富士山の宝永噴火", "長正の洪水"], ans: 1, exp: "1498年の明応地震に伴う大津波により大仏殿が流失しました。" },
+            { q: "5. 鎌倉大仏の材質は何ですか。", options: ["木造", "石造", "青銅（ブロンズ・銅造）", "鉄造"], ans: 2, exp: "鎌倉大仏は青銅（銅鋳造）で造られています。" },
+            { q: "6. 「南無阿弥陀仏」と唱えれば極楽浄土へ行けると説き、浄土宗を開いた人物はだれですか。", options: ["法然", "親鸞", "日蓮", "一遍"], ans: 0, exp: "浄土宗の開祖は法然です。" },
+            { q: "7. 「南無妙法蓮華経」を唱え、幕府に『立正安国論』を提出した人物はだれですか。", options: ["法然", "日蓮", "道元", "栄西"], ans: 1, exp: "日蓮は鎌倉の辻説法で題目を唱え、北条時頼に『立正安国論』を提出しました。" },
+            { q: "8. 「踊り念仏」で全国を巡り、庶民に教えを広めた時宗の開祖はだれですか。", options: ["親鸞", "一遍", "道元", "空海"], ans: 1, exp: "踊り念仏で知られる時宗の開祖は一遍（遊行上人）です。" },
+            { q: "9. 「かまくらや 御仏なれど 釈迦むには 美男におわす 夏木立かな」と詠んだ歌人はだれですか。", options: ["与謝野晶子", "樋口一葉", "正岡子規", "若山牧水"], ans: 0, exp: "与謝野晶子が鎌倉大仏を訪れた際に詠んだ歌です。" },
+            { q: "10. 東大寺再建にあたり、宋の建築様式「大仏様（天竺様）」を導入した僧はだれですか。", options: ["重源", "行基", "鑑真", "栄西"], ans: 0, exp: "東大寺の再建を指揮したのは重源（勧進上人）です。" }
+        ],
+        hard: [
+            { q: "11. 鎌倉大仏の造営資金を集めるために全国を巡ったとされる僧（勧進上人）はだれですか。", options: ["浄光", "重源", "行基", "文覚"], ans: 0, exp: "『吾妻鏡』によると、僧・浄光が大仏造営の資金を集めたと記録されています。" },
+            { q: "12. 運慶・快慶らが率いた、東大寺南大門金剛力士像などを制作した仏像制作集団を何と呼びますか。", options: ["院派", "円派", "慶派", "奈良仏師"], ans: 2, exp: "写実的で力強い作風の「慶派」が武士に好まれました。" },
+            { q: "13. 鎌倉新仏教の開祖と著書の組み合わせとして誤っているものはどれですか。", options: ["法然 — 『選択本願念仏集』", "親鸞 — 『教行信証』", "道元 — 『正法眼蔵』", "日蓮 — 『歎異抄』"], ans: 3, exp: "『歎異抄』は親鸞の弟子・唯円の著作です。日蓮の代表著書は『立正安国論』です。" },
+            { q: "14. 複数の木材を組み合わせて大きな仏像を作る技法は何ですか。", options: ["一木造", "寄木造", "乾漆造", "塑像"], ans: 1, exp: "平安後期に定朝が完成させた「寄木造（よせぎづくり）」です。" },
+            { q: "15. 日蓮が鎌倉の街道筋で行った説法スタイルを何と呼びますか。", options: ["辻説法", "法話", "座禅", "遊行"], ans: 0, exp: "街頭に立って直接民衆に説いた「辻説法」です。" },
+            { q: "16. 高徳院近くにあり、木造十一面観音立像で有名な古刹はどこですか。", options: ["長谷寺", "極楽寺", "成就院", "光則寺"], ans: 0, exp: "長谷寺（長谷観音）は日本最大級の木造観音像を祀ります。" },
+            { q: "17. 忍性や叡尊らが実践した、ハンセン病患者救済や社会事業を行った仏教宗派は何ですか。", options: ["律宗（真言律宗）", "浄土真宗", "曹洞宗", "日蓮宗"], ans: 0, exp: "叡尊や忍性などの律宗の僧は社会事業や医療活動に尽力しました。" },
+            { q: "18. 鎌倉大仏の背面に開けられている2つの大きな窓の役割は何ですか。", options: ["敵を攻撃する狭間", "鋳造時の内部の土の搬出や通気のため", "明かり取りの装飾", "排水口"], ans: 1, exp: "空洞になっている内部の型土を取り出したり換気を行うための窓です。" },
+            { q: "19. 「善人なおもて往生をとげる いわんや悪人をや」に代表される親鸞の思想は何ですか。", options: ["悪人正機説", "専修念仏", "法華最上説", "心身脱落"], ans: 0, exp: "煩悩の深い者こそ阿弥陀如来の救いの対象であるとする「悪人正機説」です。" },
+            { q: "20. 道元が越前国（福井県）に開き、座禅を厳格に実践した曹洞宗の大本山は何ですか。", options: ["永平寺", "総持寺", "建仁寺", "知恩院"], ans: 0, exp: "道元が越前に開いたのが「永平寺」です。" }
+        ]
+    },
+    enoshima: {
+        title: "江の島",
+        frequent: [
+            { q: "1. 満潮時には島になり、干潮時には砂州があらわれて陸続きになる地形を地理用語で何と呼びますか。", options: ["陸繋島（りくけいとう）", "リアス海岸", "カルスト地形", "扇状地"], ans: 0, exp: "砂州で陸地と繋がった島を「陸繋島」と呼びます。" },
+            { q: "2. 江の島が面している、神奈川県南部に広がる湾の名前は何ですか。", options: ["相模湾", "東京湾", "駿河湾", "伊勢湾"], ans: 0, exp: "三浦半島と真鶴半島に挟まれた「相模湾」です。" },
+            { q: "3. 鎌倉・藤沢間を走るレトロな観光電車の略称は何ですか。", options: ["江ノ電", "箱根登山電車", "シーサイドライン", "湘南モノレール"], ans: 0, exp: "「江ノ電」の愛称で親しまれる江ノ島電鉄です。" },
+            { q: "4. 江の島に祀られている日本三大弁財天の一つは何神社ですか。", options: ["江島神社", "鶴岡八幡宮", "銭洗弁天", "箱根神社"], ans: 0, exp: "安芸の厳島、近江の竹生島と並ぶ日本三大弁財天の「江島神社」です。" },
+            { q: "5. 波の侵食で削られてできた江の島奥部の洞窟を何と呼びますか。", options: ["江の島岩屋", "鳴沢氷穴", "秋芳洞", "龍泉洞"], ans: 0, exp: "海食洞である「江の島岩屋」です。" },
+            { q: "6. 湘南海岸沿いで、夏の日中に海から陸へ吹く風は何ですか。", options: ["海風", "陸風", "季節風", "台風"], ans: 0, exp: "昼間、陸上が温められて生じる「海風」です。" },
+            { q: "7. 相模湾沿岸で盛んな、網を設置して魚をとる伝統的漁法は何ですか。", options: ["定置網漁", "底引き網漁", "遠洋マグロ漁", "養殖業"], ans: 0, exp: "相模湾沿岸ではシラスなどを狙う「定置網漁業」が盛んです。" },
+            { q: "8. 相模湾の名物グルメであるカタクチイワシなどの稚魚は何ですか。", options: ["シラス", "サクラエビ", "ウニ", "ホタテ"], ans: 0, exp: "名物の「湘南シラス」です。" },
+            { q: "9. 1964年・2020年の東京オリンピックで江の島が会場となった競技は何ですか。", options: ["セーリング（ヨット）", "サーフィン", "オープンウォーター", "ビーチバレー"], ans: 0, exp: "江の島湘南港で「セーリング競技」が開催されました。" },
+            { q: "10. 相模湾沿岸の気候区分として正しいものはどれですか。", options: ["太平洋側気候", "日本海側気候", "内陸性気候", "瀬戸内式気候"], ans: 0, exp: "黒潮の影響で年間を通じて温暖な「太平洋側気候」です。" }
+        ],
+        hard: [
+            { q: "11. 波の侵食と地盤の隆起で作られた平坦な岩の棚（地形）を何と呼びますか。", options: ["海食台（波食棚）", "砂州", "河岸段丘", "リアス海岸"], ans: 0, exp: "波で削られた浅瀬が隆起した「海食台（波食棚）」です。" },
+            { q: "12. 相模湾海底を通るプレート境界の浅い海溝状地形は何ですか。", options: ["相模トラフ", "日本海溝", "南海トラフ", "マリアナ海溝"], ans: 0, exp: "関東大震災の震源域となった「相模トラフ」です。" },
+            { q: "13. 江の島植物園（サムエル・コッキング苑）の基礎を作ったイギリス人貿易商はだれですか。", options: ["サムエル・コッキング", "グラバー", "ヘボン", "オールコック"], ans: 0, exp: "「サムエル・コッキング」が温室を備えた庭園を造りました。" },
+            { q: "14. 相模湾沖を流れる暖流（日本海流）の名前は何ですか。", options: ["黒潮（日本海流）", "親潮（千島海流）", "対馬海流", "リマン海流"], ans: 0, exp: "太平洋側を北上する暖流「黒潮」です。" },
+            { q: "15. 江の島へ渡る自動車専用の橋は何ですか。", options: ["江の島大橋", "湘南大橋", "横浜ベイブリッジ", "レインボーブリッジ"], ans: 0, exp: "歩道用の「江の島弁天橋」と並行する「江の島大橋」です。" },
+            { q: "16. 江の島対岸の片瀬海岸に注ぐ河川は何ですか。", options: ["境川・引地川", "多摩川", "相模川", "酒匂川"], ans: 0, exp: "片瀬海岸には「境川」が注いでいます。" },
+            { q: "17. 江の島参詣（江の島詣）が庶民の間で大ブームとなった時代はいつですか。", options: ["江戸時代中期〜後期", "鎌倉時代初期", "室町時代", "明治時代末期"], ans: 0, exp: "江戸時代中期以降、大山詣とセットの行楽として大流行しました。" },
+            { q: "18. 江の島頂上にある展望灯台の現在の名称は何ですか。", options: ["江の島シーキャンドル", "横浜マリンタワー", "千葉ポートタワー", "犬吠埼灯台"], ans: 0, exp: "「江の島シーキャンドル」です。" },
+            { q: "19. 冬から春に関東へ大雪や荒天をもたらす太平洋側を通る低気圧は何ですか。", options: ["南岸低気圧", "台風", "オホーツク海高気圧", "熱帯低気圧"], ans: 0, exp: "相模湾に強い風としけをもたらす「南岸低気圧」です。" },
+            { q: "20. 湘南海岸の美しい砂浜が形成された地理的メカニズムとして正しいものはどれですか。", options: ["河川が運んだ土砂や波で揚げられた砂が沿岸流で流され形成された", "火山灰のみが積もった", "氷河の削り痕", "珊瑚礁が隆起した"], ans: 0, exp: "相模川や境川の土砂が波や沿岸流で運ばれて砂浜海岸が形成されました。" }
+        ]
+    }
+};
+
+let currentSpotKey = "";
+let currentQuestionList = [];
+let currentIndex = 0;
+let userSelectedOption = -1;
+let scoreCount = 0;
+
+function startQuiz(spotKey) {
+    currentSpotKey = spotKey;
+    const data = quizData[spotKey];
+    
+    // 頻出10問 + 難問10問の計20問配列を作成
+    currentQuestionList = [
+        ...data.frequent.map(q => ({ ...q, type: 'frequent', badge: '【頻出】' })),
+        ...data.hard.map(q => ({ ...q, type: 'hard', badge: '【難問】' }))
+    ];
+    
+    currentIndex = 0;
+    scoreCount = 0;
+
+    showQuestionPage();
+}
+
+function showQuestionPage() {
+    const qData = currentQuestionList[currentIndex];
+    const totalQ = currentQuestionList.length;
+
+    // プログレスバー更新
+    document.getElementById("progress-text").innerText = `第 ${currentIndex + 1} / ${totalQ} 問`;
+    const percent = ((currentIndex + 1) / totalQ) * 100;
+    document.getElementById("progress-bar").style.width = `${percent}%`;
+
+    // スポット名表示
+    document.getElementById("spot-title-q").innerText = `${quizData[currentSpotKey].title} の問題`;
+
+    // 問題文
+    const badgeClass = qData.type === 'frequent' ? 'badge-frequent' : 'badge-hard';
+    document.getElementById("q-title").innerHTML = `<span class="${badgeClass}">${qData.badge}</span> ${qData.q}`;
+
+    // 選択肢
+    const container = document.getElementById("options-container");
+    container.innerHTML = "";
+    userSelectedOption = -1;
+
+    // ボタンの無効化（選択肢を選ぶまで押せない）
+    const submitBtn = document.getElementById("btn-submit-answer");
+    submitBtn.classList.add("btn-disabled");
+    submitBtn.disabled = true;
+
+    const labels = ["ア", "イ", "ウ", "エ"];
+    qData.options.forEach((opt, idx) => {
+        const lbl = document.createElement("label");
+        lbl.className = "option-label";
+        lbl.innerHTML = `
+            <input type="radio" name="current_option" value="${idx}" onchange="onSelectOption(${idx})">
+            ${labels[idx]}. ${opt}
+        `;
+        container.appendChild(lbl);
+    });
+
+    document.getElementById("page-select").classList.add("hidden");
+    document.getElementById("page-question").classList.remove("hidden");
+    document.getElementById("page-explanation").classList.add("hidden");
+    document.getElementById("page-final-result").classList.add("hidden");
+    window.scrollTo(0, 0);
+}
+
+function onSelectOption(val) {
+    userSelectedOption = val;
+    const submitBtn = document.getElementById("btn-submit-answer");
+    submitBtn.classList.remove("btn-disabled");
+    submitBtn.disabled = false;
+}
+
+function submitCurrentAnswer() {
+    if (userSelectedOption === -1) return;
+
+    const qData = currentQuestionList[currentIndex];
+    const isCorrect = (userSelectedOption === qData.ans);
+
+    if (isCorrect) {
+        scoreCount++;
+    }
+
+    // 解説ページの設定
+    document.getElementById("spot-title-e").innerText = `${quizData[currentSpotKey].title} の解説`;
+    
+    const badgeElem = document.getElementById("result-badge");
+    if (isCorrect) {
+        badgeElem.className = "result-badge result-badge-correct";
+        badgeElem.innerText = "〇 正解！";
+    } else {
+        badgeElem.className = "result-badge result-badge-incorrect";
+        badgeElem.innerText = "× 不正解…";
+    }
+
+    const badgeClass = qData.type === 'frequent' ? 'badge-frequent' : 'badge-hard';
+    document.getElementById("e-title").innerHTML = `<span class="${badgeClass}">${qData.badge}</span> ${qData.q}`;
+
+    const labels = ["ア", "イ", "ウ", "エ"];
+    document.getElementById("e-user-ans").innerText = `${labels[userSelectedOption]}. ${qData.options[userSelectedOption]}`;
+    document.getElementById("e-correct-ans").innerText = `${labels[qData.ans]}. ${qData.options[qData.ans]}`;
+    document.getElementById("e-explanation-text").innerText = qData.exp;
+
+    // 次へボタンのテキスト
+    const nextBtn = document.getElementById("btn-next-step");
+    if (currentIndex + 1 < currentQuestionList.length) {
+        nextBtn.innerText = "次の問題へ";
+    } else {
+        nextBtn.innerText = "最終結果を見る";
+    }
+
+    document.getElementById("page-question").classList.add("hidden");
+    document.getElementById("page-explanation").classList.remove("hidden");
+    window.scrollTo(0, 0);
+}
+
+function nextStep() {
+    currentIndex++;
+    if (currentIndex < currentQuestionList.length) {
+        showQuestionPage();
+    } else {
+        showFinalResultPage();
+    }
+}
+
+function showFinalResultPage() {
+    const totalQ = currentQuestionList.length;
+    document.getElementById("final-spot-title").innerText = `${quizData[currentSpotKey].title} - 全問解答完了！`;
+    document.getElementById("final-score-text").innerText = `${scoreCount} / ${totalQ} 点`;
+
+    let comment = "";
+    if (scoreCount === 20) {
+        comment = "全問正解！完璧です！難関校（開成・聖光・麻布など）合格レベルの完璧な知識です！";
+    } else if (scoreCount >= 15) {
+        comment = "素晴らしい！難関校突破ラインを十分クリアしています！";
+    } else if (scoreCount >= 10) {
+        comment = "合格ラインまであと一歩！間違えた問題をもう一度復習してみましょう！";
+    } else {
+        comment = "暗記事項を整理して、もう一度チャレンジしてみましょう！";
+    }
+    document.getElementById("final-score-comment").innerText = comment;
+
+    document.getElementById("page-explanation").classList.add("hidden");
+    document.getElementById("page-final-result").classList.remove("hidden");
+    window.scrollTo(0, 0);
+}
+
+function backToSelect() {
+    document.getElementById("page-select").classList.remove("hidden");
+    document.getElementById("page-question").classList.add("hidden");
+    document.getElementById("page-explanation").classList.add("hidden");
+    document.getElementById("page-final-result").classList.add("hidden");
+    window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
